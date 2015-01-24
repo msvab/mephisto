@@ -11,6 +11,10 @@ Many services exposing HTTP API already publish documentation as an artifact of 
 is done using RAML, Swagger or any similar framework that defines request and response formats, then there is no reason
 why we couldn't use that as a representation of the service in our integration tests.
 
+### Modules
+* __mephisto-raml__ Loads service contract from RAML documentation.
+* __mephisto-jersey-client__ Jersey client filter that validates requests and responses against given API contract.
+
 ### Use cases
 #### 1. Verify that our API documentation is updated together with API changes
 In integration tests for our own service, we can validate that all the HTTP calls we make to our service conform with documentation.
