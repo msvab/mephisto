@@ -1,0 +1,12 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 9200
+      soLingerTime: 0s
+  adminConnectors:
+    - type: http
+      port: 9201
+      soLingerTime: 0s
+
+logging:
+  level: INFO

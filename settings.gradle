@@ -1,0 +1,6 @@
+rootProject.name = 'mephisto'
+include 'mephisto-core',
+        'mephisto-raml',
+        'mephisto-jersey-client',
+        'mephisto-jersey-server',
+        'example-jersey-client'

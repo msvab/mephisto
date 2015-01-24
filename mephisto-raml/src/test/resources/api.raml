@@ -1,0 +1,74 @@
+#%RAML 0.8
+
+title: Test Contract
+
+/basic:
+  get:
+    responses:
+      200:
+        description: Success
+        body:
+          application/json:
+  post:
+    body:
+      application/json:
+      application/xml:
+
+/parametrized/{key}/data:
+  get:
+    responses:
+      200:
+        description: Success
+  /subresource:
+    get:
+      responses:
+        200:
+          description: Success
+
+/uri-params:
+  /enum/{enum}:
+    uriParameters:
+      enum:
+        type: string
+        enum: [ foo, bar ]
+    get:
+  /int/{int}:
+    uriParameters:
+      int:
+        type: integer
+    get:
+  /num/{num}:
+    uriParameters:
+      num:
+        type: number
+    get:
+  /bool/{bool}:
+    uriParameters:
+      bool:
+        type: boolean
+    get:
+
+/query-params:
+  get:
+    queryParameters:
+      action:
+        type: string
+        enum: [ lol, rofl ]
+        required: false
+      version:
+        type: integer
+        required: true
+
+/headers:
+  get:
+    headers:
+      Some-Header:
+        type: string
+        enum: [ lol, lmao ]
+        required: true
+      Other-Header:
+        type: integer
+        required: false
+      Regex-Header-{?}:
+        type: integer
+        required: false

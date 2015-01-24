@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':mephisto-core')
+    compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.assertj:assertj-core:$assertjVersion"
+    testCompile "org.mockito:mockito-core:$mockitoVersion"
+}
