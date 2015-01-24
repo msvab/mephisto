@@ -1,6 +1,6 @@
 # Mephisto
 
-## Documentation-Driven API testing in Java
+## Documentation-Driven HTTP API testing in Java
 
 This framework allows you to verify that HTTP calls to another service are not breaking its contract, as defined by its API documentation.
 
@@ -10,7 +10,7 @@ is done using RAML, Swagger or any similar framework that defines request and re
 why we couldn't use that as a representation of the service in our integration tests.
 
 ### Use cases
-#### 1. Verifying that our API documentation is updated together with API changes
+#### 1. Verify that our API documentation is updated together with API changes
 In integration tests for our own service, we can validate that all the HTTP calls we make to our service conform with documentation.
 
 At the moment only HTTP calls done through Jersey Client are supported.
