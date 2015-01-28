@@ -5,7 +5,7 @@ dependencies {
     compile ("io.dropwizard:dropwizard-core:0.8.0-rc2") {
         exclude group: 'org.glassfish.jersey.core'
     }
-    compile "org.projectlombok:lombok:1.14.8"
+    compile "org.projectlombok:lombok:1.16.0"
 
     testCompile project(':mephisto-raml')
     testCompile project(':mephisto-jersey-client')
