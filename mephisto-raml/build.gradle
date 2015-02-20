@@ -3,13 +3,12 @@ dependencies {
     compile ("org.raml:raml-parser:$ramlVersion") {
         exclude group: 'commons-logging'
         exclude group: 'org.slf4j'
-        exclude group: 'org.kitchen-eel'
+        exclude group: 'com.github.fge'
         exclude group: 'xml-apis'
-        exclude group: 'com.fasterxml.jackson.core'
     }
     compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
 
     testCompile "junit:junit:$junitVersion"
     testCompile "org.assertj:assertj-core:$assertjVersion"
-//    testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
+    testCompile "org.slf4j:slf4j-simple:$slf4jVersion"
 }
