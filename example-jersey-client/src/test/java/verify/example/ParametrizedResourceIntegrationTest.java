@@ -43,7 +43,7 @@ public class ParametrizedResourceIntegrationTest {
     public void shouldFailForUnknownSubresource() {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/parametrized/lmao/data/unknown").request();
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new ResourceNotDefinedException("GET", "/parametrized/lmao/data/unknown"));

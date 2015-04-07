@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.BDDCatchException.caughtException;
 import static com.googlecode.catchexception.apis.BDDCatchException.then;
 import static com.googlecode.catchexception.apis.BDDCatchException.when;
 import static net.svab.mephisto.model.ResourceBuilder.resourceBuilder;
@@ -30,7 +30,7 @@ public class ServiceResponseTest {
         Resource resource = resourceBuilder().path("/foo/{bar}").method("POST").uriParameter(new UriParameter("bar", ParameterType.STRING)).response(422, new Response(new HashSet<String>())).build();
         ServiceResponse response = new ServiceResponse("/foo/rubbish", "POST", 200, null);
 
-        when(response).validate(resource);
+        when(() -> response.validate(resource));
 
         then(caughtException())
                 .isInstanceOf(ResponseNotDefinedException.class)
@@ -47,7 +47,7 @@ public class ServiceResponseTest {
                 .response(422, new Response(newHashSet("application/json"))).build();
         ServiceResponse response = new ServiceResponse("/foo/rubbish", "POST", 422, "application/xml");
 
-        when(response).validate(resource);
+        when(() -> response.validate(resource));
 
         then(caughtException())
                 .isInstanceOf(ResponseNotDefinedException.class)

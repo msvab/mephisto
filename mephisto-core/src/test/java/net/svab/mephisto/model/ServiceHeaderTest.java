@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.BDDCatchException.caughtException;
 import static com.googlecode.catchexception.apis.BDDCatchException.then;
 import static com.googlecode.catchexception.apis.BDDCatchException.when;
 import static java.util.Arrays.asList;
@@ -21,7 +21,7 @@ public class ServiceHeaderTest {
         ResourceKey resourceKey = resourceKeyBuilder().build();
         ServiceHeader serviceHeader = new ServiceHeader("foo", asList("lol"));
 
-        when(serviceHeader).validate(header, resourceKey);
+        when(() -> serviceHeader.validate(header, resourceKey));
 
         then(caughtException())
                 .isInstanceOf(InvalidHeaderException.class)
@@ -36,7 +36,7 @@ public class ServiceHeaderTest {
         ResourceKey resourceKey = resourceKeyBuilder().build();
         ServiceHeader serviceHeader = new ServiceHeader("foo", asList("3"));
 
-        when(serviceHeader).validate(header, resourceKey);
+        when(() -> serviceHeader.validate(header, resourceKey));
 
         then(caughtException())
                 .isInstanceOf(InvalidHeaderException.class)

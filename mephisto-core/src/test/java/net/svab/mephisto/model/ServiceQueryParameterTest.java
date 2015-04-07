@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static com.google.common.collect.Sets.newHashSet;
-import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.BDDCatchException.caughtException;
 import static com.googlecode.catchexception.apis.BDDCatchException.then;
 import static com.googlecode.catchexception.apis.BDDCatchException.when;
 import static java.util.Arrays.asList;
@@ -21,7 +21,7 @@ public class ServiceQueryParameterTest {
         ResourceKey resourceKey = resourceKeyBuilder().build();
         ServiceQueryParameter serviceQueryParameter = new ServiceQueryParameter("foo", asList("lol"));
 
-        when(serviceQueryParameter).validate(queryParameter, resourceKey);
+        when(() -> serviceQueryParameter.validate(queryParameter, resourceKey));
 
         then(caughtException())
                 .isInstanceOf(InvalidQueryParameterException.class)
@@ -36,7 +36,7 @@ public class ServiceQueryParameterTest {
         ResourceKey resourceKey = resourceKeyBuilder().build();
         ServiceQueryParameter serviceQueryParameter = new ServiceQueryParameter("foo", asList("3"));
 
-        when(serviceQueryParameter).validate(queryParameter, resourceKey);
+        when(() -> serviceQueryParameter.validate(queryParameter, resourceKey));
 
         then(caughtException())
                 .isInstanceOf(InvalidQueryParameterException.class)

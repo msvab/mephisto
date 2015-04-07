@@ -41,7 +41,7 @@ public class QueryParamsResourceIntegrationTest {
     public void shouldFailForUnsupportedEnumValue() {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/query-params").queryParam("status", "lol").request();
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new InvalidQueryParameterException("status", ImmutableSet.of("FOO", "BAR"), "lol", new ResourceKey("/query-params", "GET")));
@@ -51,7 +51,7 @@ public class QueryParamsResourceIntegrationTest {
     public void shouldFailWhenRequiredQueryParamIsMissing() {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/query-params").request();
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new RequiredQueryParametersMissingException(newHashSet("version"), new ResourceKey("/query-params", "GET")));
@@ -61,7 +61,7 @@ public class QueryParamsResourceIntegrationTest {
     public void shouldFailForUnknownQueryParam() {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/query-params").queryParam("custom", "112").request();
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new QueryParameterNotDefinedException("custom", new ResourceKey("/query-params", "GET")));

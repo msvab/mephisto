@@ -3,7 +3,7 @@ package net.svab.mephisto.model;
 import net.svab.mephisto.error.ResourceNotDefinedException;
 import org.junit.Test;
 
-import static com.googlecode.catchexception.CatchException.caughtException;
+import static com.googlecode.catchexception.apis.BDDCatchException.caughtException;
 import static com.googlecode.catchexception.apis.BDDCatchException.then;
 import static com.googlecode.catchexception.apis.BDDCatchException.when;
 import static java.util.Arrays.asList;
@@ -23,14 +23,14 @@ public class ContractTest {
 
     @Test
     public void shouldFailForUnknownMethod() {
-        when(contract).validateResource("DELETE", "/foo/{bar}");
+        when(() -> contract.validateResource("DELETE", "/foo/{bar}"));
 
         then(caughtException()).isInstanceOf(ResourceNotDefinedException.class);
     }
 
     @Test
     public void shouldFailForUnknownMethodAndUrl() {
-        when(contract).validateResource("DELETE", "/foo");
+        when(() -> contract.validateResource("DELETE", "/foo"));
 
         then(caughtException()).isInstanceOf(ResourceNotDefinedException.class);
     }

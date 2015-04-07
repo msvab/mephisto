@@ -66,7 +66,7 @@ public class HeadersResourceIntegrationTest {
         String value = "lol";
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/headers").request().header(name, value);
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new InvalidHeaderException(name, ImmutableSet.of("FOO", "BAR"), value, new ResourceKey("/headers", "GET")));
@@ -78,7 +78,7 @@ public class HeadersResourceIntegrationTest {
         String value = "66.9";
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/headers").request().header(name, value);
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new InvalidHeaderException(name, ParameterType.INTEGER, value, new ResourceKey("/headers", "GET")));
@@ -90,7 +90,7 @@ public class HeadersResourceIntegrationTest {
         String value = "xxx";
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/headers").request().header(name, value);
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new InvalidHeaderException(name, ParameterType.INTEGER, value, new ResourceKey("/headers", "GET")));
@@ -102,7 +102,7 @@ public class HeadersResourceIntegrationTest {
         String value = "xxx";
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/headers").request().header(name, value);
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new InvalidHeaderException(name, ParameterType.NUMBER, value, new ResourceKey("/headers", "GET")));
@@ -114,7 +114,7 @@ public class HeadersResourceIntegrationTest {
         String value = "truedat";
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/headers").request().header(name, value);
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new InvalidHeaderException(name, ParameterType.BOOLEAN, value, new ResourceKey("/headers", "GET")));
@@ -124,7 +124,7 @@ public class HeadersResourceIntegrationTest {
     public void shouldFailForRequiredHeaderMissing() {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/headers").request();
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new RequiredHeaderMissingException(newHashSet(new Header(eq("Some-Header"), ParameterType.STRING, new ArrayList<String>(), true)), new ResourceKey("/headers", "GET")));

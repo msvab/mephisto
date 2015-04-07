@@ -40,7 +40,7 @@ public class BasicResourceIntegrationTest {
     public void shouldFailOnUnknownUrl() throws IOException {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/basics").request();
 
-        when(resource).get(ClientResponse.class);
+        when(() -> resource.get(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new ResourceNotDefinedException("GET", "/basics"));
@@ -50,7 +50,7 @@ public class BasicResourceIntegrationTest {
     public void shouldFailOnUnsupportedMethod() {
         JerseyInvocation.Builder resource = client.target("http://localhost:9200/basic").request();
 
-        when(resource).delete(ClientResponse.class);
+        when(() -> resource.delete(ClientResponse.class));
 
         Response response = ((WebApplicationException) caughtException()).getResponse();
         ResponseAssert.assertThat(response).isBreakingContract(400, new ResourceNotDefinedException("DELETE", "/basic"));
